@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,10 +7,26 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="labs.sdm.practica.MainActivity">
+    tools:context="labs.sdm.practica.MainActivity"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+    <Button
+        android:id="@+id/bPlay"
+        android:text="@string/bPlay"
+        android:drawableLeft="@android:drawable/ic_media_play"
+        style="@style/dashboard_button"/>
+
+    <Button
+        android:id="@+id/bScores"
+        android:text="@string/bScores"
+        android:drawableLeft="@android:drawable/ic_input_add"
+        style="@style/dashboard_button"/>
+
+    <Button
+        android:id="@+id/bSettings"
+        android:text="@string/bSettings"
+        android:drawableLeft="@android:drawable/ic_menu_agenda"
+        style="@style/dashboard_button"/>
+
+
+</LinearLayout>

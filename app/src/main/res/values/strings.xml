@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Practica</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_credits">Credits</string>
+    <string name="title_activity_scores">Scores</string>
+    <string name="title_activity_play">Play</string>
+    <string name="title_activity_main">Main Menu</string>
+    <string name="bPlay">Play</string>
+    <string name="bScores">Scores</string>
+    <string name="bSettings">Settings</string>
 </resources>

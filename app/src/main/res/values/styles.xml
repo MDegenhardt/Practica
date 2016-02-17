@@ -8,4 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="dashboard_button" parent="Base.Widget.AppCompat.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:onClick">dashboardButtonClicked</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:padding">30dp</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
 </resources>
