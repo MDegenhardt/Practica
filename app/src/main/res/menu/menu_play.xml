@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_joker_telephone"
+        android:icon="@android:drawable/ic_menu_call"
+        android:title="@string/title_joker_telephone"
+        android:visible="true"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_joker_fifty"
+        android:icon="@android:drawable/ic_input_get"
+        android:title="@string/title_joker_fifty"
+        android:visible="true"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_joker_audience"
+        android:icon="@android:drawable/ic_media_previous"
+        android:title="@string/title_joker_audience"
+        android:visible="true"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_quit"
+        android:icon="@android:drawable/ic_notification_clear_all"
+        android:title="@string/title_quit"
+        android:visible="true"
+        app:showAsAction="always"/>
+
+
+</menu>

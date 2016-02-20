@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,6 +7,76 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="labs.sdm.practica.CreditsActivity">
+    tools:context="labs.sdm.practica.CreditsActivity"
+    android:orientation="vertical"
+    >
 
-</RelativeLayout>
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/CreditsTop"
+        android:id="@+id/creditsTop"
+        android:layout_weight="3"
+        android:textSize="40sp"
+        style="@style/credits_item"
+         />
+
+    <TextView
+        android:text="@string/CreditsAuthors"
+        android:id="@+id/creditsAuthors"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_weight="1"
+        android:textSize="22sp"
+        style="@style/credits_item" />
+
+    <TextView
+        android:text="@string/CreditsAuthor1"
+        android:id="@+id/creditsAuthor1"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        style="@style/credits_item"
+        />
+
+    <TextView
+        android:text="@string/CreditsAuthor2"
+        android:id="@+id/creditsAuthor2"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        style="@style/credits_item"
+        />
+
+    <TextView
+        android:text="@string/CreditsSubject"
+        android:id="@+id/creditsSubject"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_weight="1"
+        android:textSize="12sp"
+        style="@style/credits_item"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:layout_weight="1"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:layout_weight="1"
+            />
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
