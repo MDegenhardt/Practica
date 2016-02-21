@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Practica</string>
+    <string name="CreditsAuthors">Autoren:</string>
+    <string name="CreditsSubject"></string>
+    <string name="CreditsTop">Wer wird Millionär?</string>
+    <string name="HintFriend">Name eines Freundes</string>
+    <string name="PlayForAmount">Spiel um: 100€</string>
+    <string name="QuestionNumber">Frage: 1</string>
+    <string name="QuestionText">Was ist die Frage?</string>
+    <string name="SettingsAddFriend">Freund hinzufügen</string>
+    <string name="bPlay">Spielen</string>
+    <string name="bScores">Punkte</string>
+    <string name="bSettings">Einstellungen</string>
+    <string name="settingsEnterName">Gib deinen Namen ein</string>
+    <string name="settingsFriendsDescr">Du kannst noch einen Freund hinzufügen:</string>
+    <string name="settingsHelp">Wie oft kannst du um Hilfe bitten:</string>
+    <string name="settingsName">Name:</string>
+    <string name="tabFriends">Freunde</string>
+    <string name="tabLocal">Local</string>
+    <string name="textAnswer1">Antwort1</string>
+    <string name="title_activity_credits">Credits</string>
+    <string name="title_activity_main">Hauptmenü</string>
+    <string name="title_activity_play">Spielen</string>
+    <string name="title_activity_scores">Punkte</string>
+    <string name="title_activity_scores_delete">Punkte löschen</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="title_joker_audience">Publikumsjoker</string>
+    <string name="title_joker_fifty">50-50 Joker</string>
+    <string name="title_joker_telephone">Telefon Joker</string>
+    <string name="title_quit">Beenden</string>
+</resources>

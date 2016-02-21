@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Practica</string>
+    <string name="app_name" translatable="false">Practica</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_credits">Credits</string>
     <string name="title_activity_scores">Scores</string>
@@ -10,13 +10,13 @@
     <string name="bSettings">Settings</string>
     <string name="CreditsTop">Who wants to be a millionaire?</string>
     <string name="CreditsAuthors">Authors:</string>
-    <string name="CreditsAuthor1">Markus</string>
-    <string name="CreditsAuthor2">Author2</string>
-    <string name="CreditsSubject"><![CDATA[\u00a9 SDM 2016]]></string>
+    <string name="CreditsAuthor1" translatable="false">Markus</string>
+    <string name="CreditsAuthor2" translatable="false">Author2</string>
+    <string name="CreditsSubject" translatable="false"><![CDATA[\u00a9 SDM 2016]]></string>
     <string name="settingsName">Name: </string>
     <string name="settingsEnterName">Enter your name</string>
     <string name="settingsHelp">How many times can you ask for help:</string>
-    <string name="SettingsAddFriend">Add friend:</string>
+    <string name="SettingsAddFriend">Add friend</string>
     <string name="HintFriend">a friend\'s name</string>
     <string name="PlayForAmount">Play for: 100€</string>
     <string name="QuestionNumber">Question: 1</string>
@@ -27,4 +27,8 @@
     <string name="title_joker_audience">Audience Joker</string>
     <string name="title_quit">Quit</string>
     <string name="settingsFriendsDescr">You can add a friend:</string>
+    <string name="title_activity_scores_delete">Delete scores</string>
+    <string name="tabLocal">Local</string>
+    <string name="tabFriends">Friends</string>
+
 </resources>
