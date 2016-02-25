@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +25,14 @@ public class PlayActivity extends AppCompatActivity {
     SharedPreferences prefs;
     List<Question> questions;
 
-    private int[] moneyValues = {0,100,200,300,500,1000,2000,4000,8000,16000,32000,64000,125000,250000,500000,100000};
+    private int[] mMoneyValues = {0,100,200,300,500,1000,2000,4000,8000,16000,32000,64000,125000,250000,500000,100000};
 
     private int mCurrentQuestion; //1-15
     private int mAchievedPoints;
     private int mJokerMode;
+
+    private boolean mFiftyAvailable, mPhoneAvailable, mAudienceAvailable, mJokersSet;
+
 
     private Menu optionsMenu;
 
@@ -38,6 +42,7 @@ public class PlayActivity extends AppCompatActivity {
     TextView tvQuestionText;
 
     Button bAnswer1, bAnswer2, bAnswer3, bAnswer4;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +58,6 @@ public class PlayActivity extends AppCompatActivity {
         bAnswer2 = (Button) findViewById(R.id.bAnswer2);
         bAnswer3 = (Button) findViewById(R.id.bAnswer3);
         bAnswer4 = (Button) findViewById(R.id.bAnswer4);
-
 
 //        int question = prefs.getInt("currentQuestion", 1);
         mAchievedPoints = prefs.getInt("achievedPoints", 0);
@@ -77,11 +81,21 @@ public class PlayActivity extends AppCompatActivity {
                 mCurrentQuestion));
 
         tvCurrentMoney.setText(String.format(getResources().getString(R.string.PlayForAmount),
-                moneyValues[mCurrentQuestion]));
+                mMoneyValues[mCurrentQuestion]));
 
         Question q = questions.get(currentQuestion-1);
 
         Log.d("PlayActivity",q.getText());
+
+        bAnswer1.setEnabled(true);
+        bAnswer1.setAlpha(1.0f);
+        bAnswer2.setEnabled(true);
+        bAnswer2.setAlpha(1.0f);
+        bAnswer3.setEnabled(true);
+        bAnswer3.setAlpha(1.0f);
+        bAnswer4.setEnabled(true);
+        bAnswer4.setAlpha(1.0f);
+
 
         tvQuestionText.setText( q.getText());
         bAnswer1.setText(q.getAnswer1());
@@ -99,6 +113,16 @@ public class PlayActivity extends AppCompatActivity {
 
         editor.putInt("currentQuestion", mCurrentQuestion);
         editor.putInt("achievedPoints", mAchievedPoints);
+        editor.putBoolean("fiftyAvailable", mFiftyAvailable);
+        editor.putBoolean("phoneAvailable", mPhoneAvailable);
+        editor.putBoolean("audienceAvailable", mAudienceAvailable);
+        editor.putBoolean("jokersSet", mJokersSet);
+
+        if (mCurrentQuestion > 1){
+            editor.putBoolean("bResume", true);
+        } else {
+            editor.putBoolean("bResume", false);
+        }
         editor.apply();
 
         super.onPause();
@@ -107,8 +131,37 @@ public class PlayActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
 
+
         mCurrentQuestion = prefs.getInt("currentQuestion", 1);
         mAchievedPoints = prefs.getInt("achievedPoints", 0);
+        mFiftyAvailable = prefs.getBoolean("fiftyAvailable", false);
+        mPhoneAvailable = prefs.getBoolean("phoneAvailable", false);
+        mAudienceAvailable = prefs.getBoolean("audienceAvailable", false);
+        mJokersSet = prefs.getBoolean("jokersSet", false);
+
+        //if Jokers are not set yet
+        if (!mJokersSet){
+            if (mJokerMode == 0){
+                mFiftyAvailable = false;
+                mPhoneAvailable = false;
+                mAudienceAvailable = false;
+            } else if (mJokerMode == 1){
+                mFiftyAvailable = true;
+                mPhoneAvailable = false;
+                mAudienceAvailable = false;
+            } else if (mJokerMode == 2){
+                mFiftyAvailable = true;
+                mPhoneAvailable = true;
+                mAudienceAvailable = false;
+            } else if (mJokerMode == 3){
+                mFiftyAvailable = true;
+                mPhoneAvailable = true;
+                mAudienceAvailable = true;
+            }
+            mJokersSet = true;
+        }
+
+
 
         super.onResume();
     }
@@ -143,27 +196,43 @@ public class PlayActivity extends AppCompatActivity {
 
         if (answerSelected == correctAnswer){
             mCurrentQuestion++;
+            mAchievedPoints = mMoneyValues[mCurrentQuestion];
             updateDisplay(mCurrentQuestion);
         } else{ //lost...
 
             //reached at least level 5
             if (mCurrentQuestion>5 && mCurrentQuestion<10){
-                Log.d("PlayActivity", "Won " + moneyValues[5] + "€");
-                mAchievedPoints = moneyValues[5];
+                Log.d("PlayActivity", "Won " + mMoneyValues[5] + "€");
+                mAchievedPoints = mMoneyValues[5];
             }
             //reached at least level 10
             else if(mCurrentQuestion>=10 && mCurrentQuestion < 15){
-                Log.d("PlayActivity", "Won " + moneyValues[10] + "€");
-                mAchievedPoints = moneyValues[10];
+                Log.d("PlayActivity", "Won " + mMoneyValues[10] + "€");
+                mAchievedPoints = mMoneyValues[10];
             }
             else{
                 Log.d("PlayActivity", "Won 0€");
                 mAchievedPoints = 0;
             }
-            mCurrentQuestion = 1;
-            startActivity(new Intent(this,MainActivity.class));
-
+//            mCurrentQuestion = 1;
+//            startActivity(new Intent(this,MainActivity.class));
+            finishedGame();
         }
+
+    }
+
+    public void finishedGame(){
+
+        Toast.makeText(this, String.format(getResources().getString(R.string.endMessage),
+                mAchievedPoints), Toast.LENGTH_LONG).show();
+
+        //TODO: insert highscores
+        //reset for next game
+        mCurrentQuestion = 1;
+        mAchievedPoints = 0;
+        mJokersSet = false;
+        startActivity(new Intent(this,MainActivity.class));
+
 
     }
 
@@ -176,23 +245,28 @@ public class PlayActivity extends AppCompatActivity {
         optionsMenu = menu;
 
         getMenuInflater().inflate(R.menu.menu_play, menu);
-        if (mJokerMode == 0){
-            menu.findItem(R.id.action_joker_fifty).setVisible(false);
-            menu.findItem(R.id.action_joker_telephone).setVisible(false);
-            menu.findItem(R.id.action_joker_audience).setVisible(false);
-        } else if (mJokerMode == 1){
-            menu.findItem(R.id.action_joker_fifty).setVisible(true);
-            menu.findItem(R.id.action_joker_telephone).setVisible(false);
-            menu.findItem(R.id.action_joker_audience).setVisible(false);
-        } else if (mJokerMode == 2){
-            menu.findItem(R.id.action_joker_fifty).setVisible(true);
-            menu.findItem(R.id.action_joker_telephone).setVisible(true);
-            menu.findItem(R.id.action_joker_audience).setVisible(false);
-        } else if (mJokerMode == 3){
-            menu.findItem(R.id.action_joker_fifty).setVisible(true);
-            menu.findItem(R.id.action_joker_telephone).setVisible(true);
-            menu.findItem(R.id.action_joker_audience).setVisible(true);
-        }
+//        if (mJokerMode == 0){
+//            menu.findItem(R.id.action_joker_fifty).setVisible(false);
+//            menu.findItem(R.id.action_joker_telephone).setVisible(false);
+//            menu.findItem(R.id.action_joker_audience).setVisible(false);
+//        } else if (mJokerMode == 1){
+//            menu.findItem(R.id.action_joker_fifty).setVisible(true);
+//            menu.findItem(R.id.action_joker_telephone).setVisible(false);
+//            menu.findItem(R.id.action_joker_audience).setVisible(false);
+//        } else if (mJokerMode == 2){
+//            menu.findItem(R.id.action_joker_fifty).setVisible(true);
+//            menu.findItem(R.id.action_joker_telephone).setVisible(true);
+//            menu.findItem(R.id.action_joker_audience).setVisible(false);
+//        } else if (mJokerMode == 3){
+//            menu.findItem(R.id.action_joker_fifty).setVisible(true);
+//            menu.findItem(R.id.action_joker_telephone).setVisible(true);
+//            menu.findItem(R.id.action_joker_audience).setVisible(true);
+//        }
+
+
+        menu.findItem(R.id.action_joker_fifty).setVisible(mFiftyAvailable);
+        menu.findItem(R.id.action_joker_telephone).setVisible(mPhoneAvailable);
+        menu.findItem(R.id.action_joker_audience).setVisible(mAudienceAvailable);
         menu.findItem(R.id.action_quit).setVisible(true);
 
         return super.onCreateOptionsMenu(menu);
@@ -203,41 +277,96 @@ public class PlayActivity extends AppCompatActivity {
         Intent intent = null;
         switch (item.getItemId()) {
             case R.id.action_joker_telephone:
-
-                updateDisplay(mCurrentQuestion);
-                optionsMenu.findItem(R.id.action_joker_telephone).setVisible(false);
-                invalidateOptionsMenu();
                 Log.d("PlayActivity", "Phone Joker selected");
+                //updateDisplay(mCurrentQuestion);
+                mPhoneAvailable = false;
+                //optionsMenu.findItem(R.id.action_joker_telephone).setVisible(false);
+                invalidateOptionsMenu();
+
                 return true;
 
             case R.id.action_joker_fifty:
-
-
-                updateDisplay(mCurrentQuestion);
-                optionsMenu.findItem(R.id.action_joker_fifty).setVisible(false);
-                invalidateOptionsMenu();
                 Log.d("PlayActivity", "50-50 Joker selected");
+
+                //updateDisplay(mCurrentQuestion);
+                //optionsMenu.findItem(R.id.action_joker_fifty).setVisible(false);
+                mFiftyAvailable = false;
+                invalidateOptionsMenu();
+
+                //eliminate 2 wrong answers
+                Question q = questions.get(mCurrentQuestion-1);
+                int f1 = Integer.parseInt(q.getFifty1());
+                int f2 = Integer.parseInt(q.getFifty2());
+
+                switch (f1){
+                    case 1:
+                        bAnswer1.setEnabled(false);
+                        //TODO create Button states
+                        bAnswer1.setAlpha(.5f);
+                        break;
+                    case 2:
+                        bAnswer2.setEnabled(false);
+                        //TODO create Button states
+                        bAnswer2.setAlpha(.5f);
+                        break;
+                    case 3:
+                        bAnswer3.setEnabled(false);
+                        //TODO create Button states
+                        bAnswer3.setAlpha(.5f);
+                        break;
+                    case 4:
+                        bAnswer4.setEnabled(false);
+                        //TODO create Button states
+                        bAnswer4.setAlpha(.5f);
+                        break;
+                    default:
+                        break;
+                }
+                switch (f2){
+                    case 1:
+                        bAnswer1.setEnabled(false);
+                        //TODO create Button states
+                        bAnswer1.setAlpha(.5f);
+                        break;
+                    case 2:
+                        bAnswer2.setEnabled(false);
+                        //TODO create Button states
+                        bAnswer2.setAlpha(.5f);
+                        break;
+                    case 3:
+                        bAnswer3.setEnabled(false);
+                        //TODO create Button states
+                        bAnswer3.setAlpha(.5f);
+                        break;
+                    case 4:
+                        bAnswer4.setEnabled(false);
+                        //TODO create Button states
+                        bAnswer4.setAlpha(.5f);
+                        break;
+                    default:
+                        break;
+                }
+
                 return true;
 
             case R.id.action_joker_audience:
-
-                updateDisplay(mCurrentQuestion);
-                optionsMenu.findItem(R.id.action_joker_audience).setVisible(false);
-                invalidateOptionsMenu();
                 Log.d("PlayActivity", "Audience Joker selected");
+                //updateDisplay(mCurrentQuestion);
+                //optionsMenu.findItem(R.id.action_joker_audience).setVisible(false);
+                mAudienceAvailable = false;
+                invalidateOptionsMenu();
+
                 return true;
 
             case R.id.action_quit:
-                
-                //// TODO: 25.02.16 add ENDGAME
-                // User chose the "Credits" item, show the app Credits UI...
-//                intent = new Intent(this,CreditsActivity.class);
-//                startActivity(intent);
 
-                //for testing
-                mCurrentQuestion++;
-                updateDisplay(mCurrentQuestion);
-                invalidateOptionsMenu();
+//                mAchievedPoints = mMoneyValues[mCurrentQuestion];
+//                Toast.makeText(this, String.format(getResources().getString(R.string.endMessage),
+//                        mAchievedPoints), Toast.LENGTH_LONG).show();
+
+
+                 finishedGame();
+
                 Log.d("PlayActivity", "Quit selected");
                 return true;
 
