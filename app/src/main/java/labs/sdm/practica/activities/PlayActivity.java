@@ -59,7 +59,6 @@ public class PlayActivity extends AppCompatActivity {
         bAnswer3 = (Button) findViewById(R.id.bAnswer3);
         bAnswer4 = (Button) findViewById(R.id.bAnswer4);
 
-//        int question = prefs.getInt("currentQuestion", 1);
         mAchievedPoints = prefs.getInt("achievedPoints", 0);
         mCurrentQuestion = prefs.getInt("currentQuestion", 1);
         mJokerMode = prefs.getInt("helpNumber",0);
@@ -103,7 +102,6 @@ public class PlayActivity extends AppCompatActivity {
         bAnswer3.setText(q.getAnswer3());
         bAnswer4.setText(q.getAnswer4());
 
-        return;
     }
 
     @Override
@@ -195,9 +193,15 @@ public class PlayActivity extends AppCompatActivity {
         }
 
         if (answerSelected == correctAnswer){
-            mCurrentQuestion++;
             mAchievedPoints = mMoneyValues[mCurrentQuestion];
+            mCurrentQuestion++;
             updateDisplay(mCurrentQuestion);
+
+            //all 15 correct
+            if(mCurrentQuestion>15){
+                finishedGame(2);
+            }
+
         } else{ //lost...
 
             //reached at least level 5
@@ -214,17 +218,26 @@ public class PlayActivity extends AppCompatActivity {
                 Log.d("PlayActivity", "Won 0€");
                 mAchievedPoints = 0;
             }
-//            mCurrentQuestion = 1;
-//            startActivity(new Intent(this,MainActivity.class));
-            finishedGame();
+
+            finishedGame(1);
         }
 
     }
 
-    public void finishedGame(){
+    // code: 0 = user quit, 1 = lost, 2 = 15 right
+    public void finishedGame(int code){
 
-        Toast.makeText(this, String.format(getResources().getString(R.string.endMessage),
-                mAchievedPoints), Toast.LENGTH_LONG).show();
+        if (code == 0){
+            Toast.makeText(this, String.format(getResources().getString(R.string.endMessageQuit),
+                    mAchievedPoints), Toast.LENGTH_LONG).show();
+        } else if(code == 1){
+            Toast.makeText(this, String.format(getResources().getString(R.string.endMessageLost),
+                    mAchievedPoints), Toast.LENGTH_LONG).show();
+        } else if(code == 2){
+            Toast.makeText(this, String.format(getResources().getString(R.string.endMessageWon),
+                    mAchievedPoints), Toast.LENGTH_LONG).show();
+        }
+
 
         //TODO: insert highscores
         //reset for next game
@@ -245,23 +258,6 @@ public class PlayActivity extends AppCompatActivity {
         optionsMenu = menu;
 
         getMenuInflater().inflate(R.menu.menu_play, menu);
-//        if (mJokerMode == 0){
-//            menu.findItem(R.id.action_joker_fifty).setVisible(false);
-//            menu.findItem(R.id.action_joker_telephone).setVisible(false);
-//            menu.findItem(R.id.action_joker_audience).setVisible(false);
-//        } else if (mJokerMode == 1){
-//            menu.findItem(R.id.action_joker_fifty).setVisible(true);
-//            menu.findItem(R.id.action_joker_telephone).setVisible(false);
-//            menu.findItem(R.id.action_joker_audience).setVisible(false);
-//        } else if (mJokerMode == 2){
-//            menu.findItem(R.id.action_joker_fifty).setVisible(true);
-//            menu.findItem(R.id.action_joker_telephone).setVisible(true);
-//            menu.findItem(R.id.action_joker_audience).setVisible(false);
-//        } else if (mJokerMode == 3){
-//            menu.findItem(R.id.action_joker_fifty).setVisible(true);
-//            menu.findItem(R.id.action_joker_telephone).setVisible(true);
-//            menu.findItem(R.id.action_joker_audience).setVisible(true);
-//        }
 
 
         menu.findItem(R.id.action_joker_fifty).setVisible(mFiftyAvailable);
@@ -274,27 +270,25 @@ public class PlayActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = null;
+
+        Question q = questions.get(mCurrentQuestion-1);
         switch (item.getItemId()) {
             case R.id.action_joker_telephone:
                 Log.d("PlayActivity", "Phone Joker selected");
-                //updateDisplay(mCurrentQuestion);
                 mPhoneAvailable = false;
-                //optionsMenu.findItem(R.id.action_joker_telephone).setVisible(false);
                 invalidateOptionsMenu();
+                //show Toast
+                Toast.makeText(this, String.format(getResources().getString(R.string.phoneJokerMessage),
+                        Integer.parseInt(q.getPhone())), Toast.LENGTH_LONG).show();
 
                 return true;
 
             case R.id.action_joker_fifty:
                 Log.d("PlayActivity", "50-50 Joker selected");
-
-                //updateDisplay(mCurrentQuestion);
-                //optionsMenu.findItem(R.id.action_joker_fifty).setVisible(false);
                 mFiftyAvailable = false;
                 invalidateOptionsMenu();
 
                 //eliminate 2 wrong answers
-                Question q = questions.get(mCurrentQuestion-1);
                 int f1 = Integer.parseInt(q.getFifty1());
                 int f2 = Integer.parseInt(q.getFifty2());
 
@@ -351,29 +345,23 @@ public class PlayActivity extends AppCompatActivity {
 
             case R.id.action_joker_audience:
                 Log.d("PlayActivity", "Audience Joker selected");
-                //updateDisplay(mCurrentQuestion);
-                //optionsMenu.findItem(R.id.action_joker_audience).setVisible(false);
                 mAudienceAvailable = false;
                 invalidateOptionsMenu();
+
+                Toast.makeText(this, String.format(getResources().getString(R.string.audienceJokerMessage),
+                        Integer.parseInt(q.getAudience())), Toast.LENGTH_LONG).show();
 
                 return true;
 
             case R.id.action_quit:
 
-//                mAchievedPoints = mMoneyValues[mCurrentQuestion];
-//                Toast.makeText(this, String.format(getResources().getString(R.string.endMessage),
-//                        mAchievedPoints), Toast.LENGTH_LONG).show();
-
-
-                 finishedGame();
+                 finishedGame(0);
 
                 Log.d("PlayActivity", "Quit selected");
                 return true;
 
 
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
 
         }
@@ -381,7 +369,7 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public List<Question> generateQuestionList() {
-        List<Question> list = new ArrayList<Question>();
+        List<Question> list = new ArrayList<>();
         Question q = null;
 
         q = new Question(

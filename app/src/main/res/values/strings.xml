@@ -29,7 +29,11 @@
     <string name="title_activity_scores_delete">Delete scores</string>
     <string name="tabLocal">Local</string>
     <string name="tabFriends">Friends</string>
-    <string name="endMessage">Game Finished! You won %1$d €</string>
+    <string name="endMessageQuit">Game finished! You won %1$d €</string>
+    <string name="endMessageLost">Wrong answer! You won %1$d €</string>
+    <string name="endMessageWon">Congratulations!!! You knew everything and won %1$d €</string>
     <string name="resume">Resume</string>
+    <string name="phoneJokerMessage">Your contact thinks that answer %1$d is correct.</string>
+    <string name="audienceJokerMessage">The audience thinks that answer %1$d is correct.</string>
 
 </resources>
