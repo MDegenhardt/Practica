@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Practica</string>
-    <string name="CreditsAuthors">Autoren:</string>
+    <string name="CreditsAuthors">Autor:</string>
     <string name="CreditsSubject"></string>
     <string name="CreditsTop">Wer wird Millionär?</string>
     <string name="HintFriend">Name eines Freundes</string>
@@ -20,7 +20,6 @@
     <string name="tabLocal">Local</string>
     <string name="textAnswer1">Antwort1</string>
     <string name="title_activity_credits">Credits</string>
-    <string name="title_activity_main">Hauptmenü</string>
     <string name="title_activity_play">Spielen</string>
     <string name="title_activity_scores">Punkte</string>
     <string name="title_activity_scores_delete">Punkte löschen</string>

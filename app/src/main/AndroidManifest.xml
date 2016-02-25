@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity" android:label="@string/title_activity_main">
+        <activity android:name=".activities.MainActivity" android:label="@string/title_activity_main">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,45 +18,45 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SettingsActivity"
+        <activity android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             >
             <!-- Enable up navigation for backwards compatibility -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="labs.sdm.practica.MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
 
-        <activity android:name=".CreditsActivity"
+        <activity android:name=".activities.CreditsActivity"
             android:label="@string/title_activity_credits"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             >
             <!-- Enable up navigation for backwards compatibility -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="labs.sdm.practica.MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
 
-        <activity android:name=".ScoresActivity"
+        <activity android:name=".activities.ScoresActivity"
             android:label="@string/title_activity_scores"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             >
             <!-- Enable up navigation for backwards compatibility -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="labs.sdm.practica.MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
 
 
-        <activity android:name=".PlayActivity"
+        <activity android:name=".activities.PlayActivity"
             android:label="@string/title_activity_play"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             >
             <!-- Enable up navigation for backwards compatibility -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="labs.sdm.practica.MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
 
 

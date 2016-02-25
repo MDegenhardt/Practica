@@ -1,7 +1,9 @@
-package labs.sdm.practica;
+package labs.sdm.practica.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import labs.sdm.practica.R;
 
 public class CreditsActivity extends AppCompatActivity {
 

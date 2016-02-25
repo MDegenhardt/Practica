@@ -1,4 +1,4 @@
-package labs.sdm.practica;
+package labs.sdm.practica.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.widget.TabHost;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import labs.sdm.practica.R;
 
 public class ScoresActivity extends AppCompatActivity {
 
