@@ -35,5 +35,6 @@
     <string name="resume">Resume</string>
     <string name="phoneJokerMessage">Your contact thinks that answer %1$d is correct.</string>
     <string name="audienceJokerMessage">The audience thinks that answer %1$d is correct.</string>
+    <string name="filenameQuestions">questions.xml</string>
 
 </resources>
