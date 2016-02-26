@@ -1,7 +1,10 @@
 package labs.sdm.practica.activities;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import labs.sdm.practica.R;
+import labs.sdm.practica.databases.HighscoreSqlHelper;
 
 public class ScoresActivity extends AppCompatActivity {
 
@@ -25,18 +29,19 @@ public class ScoresActivity extends AppCompatActivity {
     SimpleAdapter adapterLocal, adapterFriends;
     // ListView object to display favourite quotations
     ListView scoresLocalListView, scoresFriendsListView;
-
-
-
-    // Whether there is any favourite quotation,
+    // Whether there is any highscore,
     // so the action to remove them from the database can appear on the ActionBar
-    boolean clearLocalScores;
+    boolean clearAllLocalHighscores;
+
+    Context context;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scores);
+
+        context = this;
 
 
         scoresLocalListView = (ListView) findViewById(R.id.lvLocal);
@@ -45,18 +50,20 @@ public class ScoresActivity extends AppCompatActivity {
         hashMapLocalList = new ArrayList<>();
         hashMapFriendsList = new ArrayList<>();
 
-        HashMap<String,String> item = new HashMap<>();
-        item.put("name", "Player1");
-        item.put("score", "300");
-        hashMapLocalList.add(item);
-        item = new HashMap<>();
-        item.put("name", "Player2");
-        item.put("score", "200");
-        hashMapLocalList.add(item);
-        item = new HashMap<>();
-        item.put("name", "Player3");
-        item.put("score", "100");
-        hashMapLocalList.add(item);
+        hashMapLocalList.addAll(HighscoreSqlHelper.getInstance(this).getQuotations());
+
+//        HashMap<String,String> item = new HashMap<>();
+//        item.put("name", "Player1");
+//        item.put("score", "300");
+//        hashMapLocalList.add(item);
+//        item = new HashMap<>();
+//        item.put("name", "Player2");
+//        item.put("score", "200");
+//        hashMapLocalList.add(item);
+//        item = new HashMap<>();
+//        item.put("name", "Player3");
+//        item.put("score", "100");
+//        hashMapLocalList.add(item);
 
         hashMapFriendsList = hashMapLocalList;
 
@@ -94,6 +101,12 @@ public class ScoresActivity extends AppCompatActivity {
 
 
         host.setCurrentTab(0);
+
+        // If there is any quotation in the favourite list then set to true the flag
+        // that controls whether to display the action for deleting all the quotations
+        if (hashMapLocalList.size() > 0) {
+            clearAllLocalHighscores = true;
+        }
     }
 
     /*
@@ -103,7 +116,7 @@ This method is executed when the activity is created to populate the ActionBar w
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_scores, menu);
-        menu.findItem(R.id.action_delete_scores).setVisible(true);
+        menu.findItem(R.id.action_delete_scores).setVisible(clearAllLocalHighscores);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -113,9 +126,35 @@ This method is executed when the activity is created to populate the ActionBar w
         Intent intent = null;
         switch (item.getItemId()) {
             case R.id.action_delete_scores:
-                // User chose the "Credits" item, show the app Credits UI...
-//                intent = new Intent(this,CreditsActivity.class);
-//                startActivity(intent);
+
+                // Build an AlertDialog to ask for confirmation before deleting all quotations
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                // Set the massage to display in the Dialog
+                builder.setMessage(R.string.confirmation_clear);
+                // Include a Button for handling positive confirmation: delete all quotations
+                builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Delete all quotations from database
+                        HighscoreSqlHelper.getInstance(context).clearAllHighscores();
+                        // Clear the data source
+                        hashMapLocalList.clear();
+                        // Notify the adapter to update the ListView since the data source has changed
+                        adapterLocal.notifyDataSetChanged();
+                        // set to false the flag that controls whether to display
+                        // the action for deleting all the quotations
+                        clearAllLocalHighscores = false;
+                        // Ask the system to rebuild the options of the ActionBar
+                        supportInvalidateOptionsMenu();
+                    }
+                });
+                // Include a Button for handling negative confirmation: do not delete all quotations
+                // No need for an onClickListener() here, as no action will take place
+                builder.setNegativeButton(android.R.string.no, null);
+                // Create and show the Dialog
+                builder.create().show();
+
+                // Return true as we handled the event
                 return true;
 
 

@@ -63,7 +63,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         nHelpSelected = prefs.getInt("helpNumber", 0);
         ((Spinner) findViewById(R.id.spinner)).setSelection(nHelpSelected);
-        ((EditText) findViewById(R.id.etName)).setText(prefs.getString("userName", ""));
+        ((EditText) findViewById(R.id.etName)).setText(prefs.getString("userName", "anonymous"));
         ((EditText) findViewById(R.id.etAddFriend)).setText(prefs.getString("friendsName", ""));
         super.onResume();
     }
