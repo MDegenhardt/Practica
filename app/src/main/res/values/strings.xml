@@ -38,5 +38,6 @@
     <string name="audienceJokerMessage">The audience thinks that answer %1$d is correct.</string>
     <string name="filenameQuestions">questions.xml</string>
     <string name="confirmation_clear">Are you sure you want to delete ALL the local highscores from the database?</string>
+    <string name="connection_not_available">No connection available. Please try again later.</string>
 
 </resources>

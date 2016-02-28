@@ -89,6 +89,7 @@
             android:layout_height="wrap_content"
             android:text="@string/SettingsAddFriend"
             android:id="@+id/bAddFriend"
+            android:onClick="addFriendClicked"
              />
 
 

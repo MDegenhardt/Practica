@@ -13,19 +13,19 @@
     <Button
         android:id="@+id/bPlay"
         android:text="@string/bPlay"
-        android:drawableLeft="@android:drawable/ic_media_play"
+        android:drawableLeft="@drawable/playbutton"
         style="@style/dashboard_button"/>
 
     <Button
         android:id="@+id/bScores"
         android:text="@string/bScores"
-        android:drawableLeft="@android:drawable/ic_input_add"
+        android:drawableLeft="@drawable/rankings"
         style="@style/dashboard_button"/>
 
     <Button
         android:id="@+id/bSettings"
         android:text="@string/bSettings"
-        android:drawableLeft="@android:drawable/ic_menu_agenda"
+        android:drawableLeft="@drawable/settings"
         style="@style/dashboard_button"/>
 
 

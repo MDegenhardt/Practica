@@ -76,7 +76,7 @@ public class HighscoreSqlHelper extends SQLiteOpenHelper{
     Get ArrayList<HashMap<String,String>> object with all the highscores stored
     in the database to generate the data source to be later linked to a ListView:
 */
-    public ArrayList<HashMap<String, String>> getQuotations() {
+    public ArrayList<HashMap<String, String>> getHighscores() {
 
         ArrayList<HashMap<String, String>> result = new ArrayList<>();
         HashMap<String, String> item;

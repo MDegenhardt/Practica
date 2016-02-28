@@ -3,6 +3,8 @@ package labs.sdm.practica.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +26,7 @@ import labs.sdm.practica.R;
 import labs.sdm.practica.databases.HighscoreSqlHelper;
 import labs.sdm.practica.parser.QuestionXmlParser;
 import labs.sdm.practica.pojo.Question;
+import labs.sdm.practica.tasks.PutHighscoresAsyncTask;
 
 public class PlayActivity extends AppCompatActivity {
 
@@ -47,6 +50,8 @@ public class PlayActivity extends AppCompatActivity {
     TextView tvQuestionText;
 
     Button bAnswer1, bAnswer2, bAnswer3, bAnswer4;
+
+    PutHighscoresAsyncTask task;
 
 
     @Override
@@ -261,8 +266,22 @@ public class PlayActivity extends AppCompatActivity {
                     mAchievedPoints), Toast.LENGTH_LONG).show();
         }
 
-
+        //Add highscores to SQL
         HighscoreSqlHelper.getInstance(this).addHighscore((prefs.getString("userName", "anonymous")), mAchievedPoints);
+
+        //Add highscore to web
+        if (isConnectionAvailable()){
+
+            String userName = prefs.getString("userName", "anonymous");
+            //new task...
+            task = new PutHighscoresAsyncTask();
+            // Start the task
+            task.execute(userName,Integer.toString(mAchievedPoints));
+        }
+        // There is no Internet connection available, so inform the user about that
+        else {
+            Toast.makeText(this, R.string.connection_not_available, Toast.LENGTH_SHORT).show();
+        }
 
         //reset for next game
         mCurrentQuestion = 1;
@@ -271,6 +290,19 @@ public class PlayActivity extends AppCompatActivity {
         startActivity(new Intent(this,MainActivity.class));
 
 
+    }
+
+    /*
+Check whether Internet connectivity is available
+*/
+    private boolean isConnectionAvailable() {
+
+        // Get a reference to the ConnectivityManager
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        // Get information for the current default data network
+        NetworkInfo info = manager.getActiveNetworkInfo();
+        // Return true if there is network connectivity
+        return ((info != null) && info.isConnected());
     }
 
     /*
