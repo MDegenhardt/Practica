@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Practica</string>
     <string name="CreditsAuthors">Autor:</string>
-    <string name="CreditsSubject"></string>
     <string name="CreditsTop">Wer wird Millionär?</string>
     <string name="HintFriend">Name eines Freundes</string>
-    <string name="PlayForAmount">Spiel um: 100€</string>
-    <string name="QuestionNumber">Frage: 1</string>
+    <string name="PlayForAmount">Spiel um %1$d€</string>
+    <string name="QuestionNumber">Frage %1$d</string>
     <string name="QuestionText">Was ist die Frage?</string>
     <string name="SettingsAddFriend">Freund hinzufügen</string>
     <string name="bPlay">Spielen</string>
@@ -17,7 +15,7 @@
     <string name="settingsHelp">Wie oft kannst du um Hilfe bitten:</string>
     <string name="settingsName">Name:</string>
     <string name="tabFriends">Freunde</string>
-    <string name="tabLocal">Local</string>
+    <string name="tabLocal">Lokal</string>
     <string name="textAnswer1">Antwort1</string>
     <string name="title_activity_credits">Credits</string>
     <string name="title_activity_play">Spielen</string>
@@ -28,4 +26,21 @@
     <string name="title_joker_fifty">50-50 Joker</string>
     <string name="title_joker_telephone">Telefon Joker</string>
     <string name="title_quit">Beenden</string>
+    <string name="addedFriend"> %1$s als Fruend %2$s online hinzugefügt.</string>
+    <string name="audienceJokerMessage">Das Publikum ist der Meinung, dass Antwort %1$d richtig ist.</string>
+    <string name="confirmation_clear">Bist du sicher, dass du alle lokalen Spielstände löschen willst?</string>
+    <string name="connection_not_available">Keine Internet Verbinung. Versuche es später noch einmal.</string>
+    <string name="correctAnswerMsg">Richtige Antwort! Du hast jetzt %1$d€.</string>
+    <string name="endMessageLost">Falsche Antwort! Du hast %1$d€ gewonnen.</string>
+    <string name="endMessageQuit">Spiel vorrüber! Du hast %1$d€ gewonnen.</string>
+    <string name="endMessageWon">Glückwunsch!!! Du hast alles gewusst und %1$d€ gewonnen!</string>
+    <string name="filenameQuestions">questions_de.xml</string>
+    <string name="phoneJokerMessage">Dein Telefonjoker glaubt, dass Antwort %1$d richtig ist.</string>
+    <string name="resume">Fortsetzen</string>
+    <string name="sv0NoJokers">0: Keine Joker</string>
+    <string name="sv1_50">1: + 50-50 Joker</string>
+    <string name="sv2_tel">2: + Telefon Joker</string>
+    <string name="sv3_aud">3: + Publikums Joker</string>
+    <string name="warningFriendName">Du musst einen Namen eingeben!</string>
+    <string name="warningJokerSelect">Du musst ein neues Spiel starten, damit diese Änderungen wirksam werden!</string>
 </resources>

@@ -32,27 +32,17 @@ public class PlayActivity extends AppCompatActivity {
 
     SharedPreferences prefs;
     List<Question> questions;
-
-    private int[] mMoneyValues = {0,100,200,300,500,1000,2000,4000,8000,16000,32000,64000,125000,250000,500000,100000};
-
+    TextView tvCurrentMoney;
+    TextView tvCurrentQuestion;
+    TextView tvQuestionText;
+    Button bAnswer1, bAnswer2, bAnswer3, bAnswer4;
+    PutHighscoresAsyncTask task;
+    private int[] mMoneyValues = {0, 100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000};
     private int mCurrentQuestion; //1-15
     private int mAchievedPoints;
     private int mJokerMode;
-
     private boolean mFiftyAvailable, mPhoneAvailable, mAudienceAvailable, mJokersSet;
-
-
     private Menu optionsMenu;
-
-    TextView tvCurrentMoney;
-    TextView tvCurrentQuestion;
-
-    TextView tvQuestionText;
-
-    Button bAnswer1, bAnswer2, bAnswer3, bAnswer4;
-
-    PutHighscoresAsyncTask task;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +72,7 @@ public class PlayActivity extends AppCompatActivity {
         QuestionXmlParser parser = new QuestionXmlParser();
         try {
             questions = parser.parseQuestion(inputStream);
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (XmlPullParserException | IOException e) {
             e.printStackTrace();
         }
 
@@ -98,7 +86,7 @@ public class PlayActivity extends AppCompatActivity {
     @SuppressLint("StringFormatInvalid")
     private void updateDisplay(int currentQuestion){
         if(currentQuestion < 1 || currentQuestion > 15){
-            Log.e("PlayActivity", "INVALID QUESTION NUMBER: " + currentQuestion);
+//            Log.e("PlayActivity", "INVALID QUESTION NUMBER: " + currentQuestion);
             return;
         }
         tvCurrentQuestion.setText(String.format(getResources().getString(R.string.QuestionNumber),
@@ -109,7 +97,7 @@ public class PlayActivity extends AppCompatActivity {
 
         Question q = questions.get(currentQuestion-1);
 
-        Log.d("PlayActivity",q.getText());
+//        Log.d("PlayActivity",q.getText());
 
         bAnswer1.setEnabled(true);
         bAnswer1.setAlpha(1.0f);
@@ -140,12 +128,6 @@ public class PlayActivity extends AppCompatActivity {
         editor.putBoolean("phoneAvailable", mPhoneAvailable);
         editor.putBoolean("audienceAvailable", mAudienceAvailable);
         editor.putBoolean("jokersSet", mJokersSet);
-
-        if (mCurrentQuestion > 1){
-            editor.putBoolean("bResume", true);
-        } else {
-            editor.putBoolean("bResume", false);
-        }
         editor.apply();
 
         super.onPause();
@@ -195,7 +177,7 @@ public class PlayActivity extends AppCompatActivity {
 
         Question q = questions.get(mCurrentQuestion-1);
         int correctAnswer = Integer.parseInt(q.getRight());
-        Log.d("PlayActivity", "Correct answer: " + correctAnswer);
+//        Log.d("PlayActivity", "Correct answer: " + correctAnswer);
 
         switch(view.getId()){
             case R.id.bAnswer1 :
@@ -234,16 +216,16 @@ public class PlayActivity extends AppCompatActivity {
 
             //reached at least level 5
             if (mCurrentQuestion>5 && mCurrentQuestion<10){
-                Log.d("PlayActivity", "Won " + mMoneyValues[5] + "€");
+//                Log.d("PlayActivity", "Won " + mMoneyValues[5] + "€");
                 mAchievedPoints = mMoneyValues[5];
             }
             //reached at least level 10
             else if(mCurrentQuestion>=10 && mCurrentQuestion < 15){
-                Log.d("PlayActivity", "Won " + mMoneyValues[10] + "€");
+//                Log.d("PlayActivity", "Won " + mMoneyValues[10] + "€");
                 mAchievedPoints = mMoneyValues[10];
             }
             else{
-                Log.d("PlayActivity", "Won 0€");
+//                Log.d("PlayActivity", "Won 0€");
                 mAchievedPoints = 0;
             }
 
@@ -267,12 +249,12 @@ public class PlayActivity extends AppCompatActivity {
         }
 
         //Add highscores to SQL
-        HighscoreSqlHelper.getInstance(this).addHighscore((prefs.getString("userName", "anonymous")), mAchievedPoints);
+        HighscoreSqlHelper.getInstance(this).addHighscore((prefs.getString("userName", getResources().getString(R.string.anonymousUser))), mAchievedPoints);
 
         //Add highscore to web
         if (isConnectionAvailable()){
 
-            String userName = prefs.getString("userName", "anonymous");
+            String userName = prefs.getString("userName", getResources().getString(R.string.anonymousUser));
             //new task...
             task = new PutHighscoresAsyncTask();
             // Start the task
@@ -330,7 +312,7 @@ Check whether Internet connectivity is available
         Question q = questions.get(mCurrentQuestion-1);
         switch (item.getItemId()) {
             case R.id.action_joker_telephone:
-                Log.d("PlayActivity", "Phone Joker selected");
+//                Log.d("PlayActivity", "Phone Joker selected");
                 mPhoneAvailable = false;
                 invalidateOptionsMenu();
                 //show Toast
@@ -340,7 +322,7 @@ Check whether Internet connectivity is available
                 return true;
 
             case R.id.action_joker_fifty:
-                Log.d("PlayActivity", "50-50 Joker selected");
+//                Log.d("PlayActivity", "50-50 Joker selected");
                 mFiftyAvailable = false;
                 invalidateOptionsMenu();
 
@@ -351,22 +333,18 @@ Check whether Internet connectivity is available
                 switch (f1){
                     case 1:
                         bAnswer1.setEnabled(false);
-                        //TODO create Button states
                         bAnswer1.setAlpha(.5f);
                         break;
                     case 2:
                         bAnswer2.setEnabled(false);
-                        //TODO create Button states
                         bAnswer2.setAlpha(.5f);
                         break;
                     case 3:
                         bAnswer3.setEnabled(false);
-                        //TODO create Button states
                         bAnswer3.setAlpha(.5f);
                         break;
                     case 4:
                         bAnswer4.setEnabled(false);
-                        //TODO create Button states
                         bAnswer4.setAlpha(.5f);
                         break;
                     default:
@@ -375,22 +353,18 @@ Check whether Internet connectivity is available
                 switch (f2){
                     case 1:
                         bAnswer1.setEnabled(false);
-                        //TODO create Button states
                         bAnswer1.setAlpha(.5f);
                         break;
                     case 2:
                         bAnswer2.setEnabled(false);
-                        //TODO create Button states
                         bAnswer2.setAlpha(.5f);
                         break;
                     case 3:
                         bAnswer3.setEnabled(false);
-                        //TODO create Button states
                         bAnswer3.setAlpha(.5f);
                         break;
                     case 4:
                         bAnswer4.setEnabled(false);
-                        //TODO create Button states
                         bAnswer4.setAlpha(.5f);
                         break;
                     default:
@@ -400,7 +374,7 @@ Check whether Internet connectivity is available
                 return true;
 
             case R.id.action_joker_audience:
-                Log.d("PlayActivity", "Audience Joker selected");
+//                Log.d("PlayActivity", "Audience Joker selected");
                 mAudienceAvailable = false;
                 invalidateOptionsMenu();
 
@@ -413,7 +387,7 @@ Check whether Internet connectivity is available
 
                  finishedGame(0);
 
-                Log.d("PlayActivity", "Quit selected");
+//                Log.d("PlayActivity", "Quit selected");
                 return true;
 
 

@@ -19,16 +19,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         Button bMainMenuPlay = (Button) findViewById(R.id.bPlay);
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        int mCurrentQuestion = prefs.getInt("currentQuestion", 1);
 
-        if(prefs.getBoolean("bResume", false)){
+        if (mCurrentQuestion > 1) {
             bMainMenuPlay.setText(getResources().getString(R.string.resume));
         } else {
             bMainMenuPlay.setText(getResources().getString(R.string.bPlay));
         }
-
     }
 
     public void dashboardButtonClicked(View view){
@@ -63,11 +68,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = null;
         switch (item.getItemId()) {
             case R.id.action_credits:
                 // User chose the "Credits" item, show the app Credits UI...
-                intent = new Intent(this,CreditsActivity.class);
+                Intent intent = new Intent(this, CreditsActivity.class);
                 startActivity(intent);
                 return true;
 

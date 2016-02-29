@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="CreditsAuthors">Autor:</string>
+    <string name="CreditsTop">¿Quién quiere ser millonario?</string>
+    <string name="HintFriend">Nombre de un amigo</string>
+    <string name="PlayForAmount">Jugar por %1$d€</string>
+    <string name="QuestionNumber">Pregunta %1$d</string>
+    <string name="QuestionText">¿Cuál es la pregunta?</string>
+    <string name="SettingsAddFriend">Añadir amigo</string>
+    <string name="addedFriend">Se ha añadido %1$s como amigo de %2$s en línea.</string>
+    <string name="audienceJokerMessage">La mayoría de publico piensa que la respuesta correcta es %1$d.</string>
+    <string name="bPlay">Jugar</string>
+    <string name="bScores">Punctuación</string>
+    <string name="bSettings">Configuración</string>
+    <string name="confirmation_clear">¿Estás seguro que quieres borrar todo la punctuación?</string>
+    <string name="connection_not_available">La red no está disponible. Inténtelo más tarde.</string>
+    <string name="correctAnswerMsg">¡Correcto! Has acumulado %1$d€</string>
+    <string name="endMessageLost">¡Incorrecto! Finalmente has ganado %1$d€.</string>
+    <string name="endMessageQuit">¡Fin del juego! Finalmente has ganado %1$d€.</string>
+    <string name="endMessageWon">¡Enhorabuena! Has sabido todo y ganado %1$d€!</string>
+    <string name="filenameQuestions">questions (spanish).xml</string>
+    <string name="phoneJokerMessage">Tu contacto telefónico piensa que la respuesta correcta es %1$d.</string>
+    <string name="resume">Continuar</string>
+    <string name="settingsEnterName">Introduzca el nombre de tu amigo</string>
+    <string name="settingsFriendsDescr">Puedes añadir un amigo:</string>
+    <string name="settingsHelp">Cuántas veces puedes pedir ayuda:</string>
+    <string name="settingsName">Nombre:</string>
+    <string name="sv0NoJokers">0: No comodíns</string>
+    <string name="sv1_50">1: + 50-50 comodín</string>
+    <string name="sv2_tel">2: + comodín de teléfono</string>
+    <string name="sv3_aud">3: + comodín de publico</string>
+    <string name="tabFriends">Amigos</string>
+    <string name="tabLocal">Local</string>
+    <string name="textAnswer1">Respuesta1</string>
+    <string name="title_activity_credits">Créditos</string>
+    <string name="title_activity_play">Jugar</string>
+    <string name="title_activity_scores">Punctuación</string>
+    <string name="title_activity_scores_delete">Borrar punctuaciónes</string>
+    <string name="title_activity_settings">Configuración</string>
+    <string name="title_joker_audience">Comodín de publico</string>
+    <string name="title_joker_fifty">50-50 comodín</string>
+    <string name="title_joker_telephone">Comodín de teléfono</string>
+    <string name="title_quit">Acabar</string>
+    <string name="warningFriendName">Tienes que introducir un nombre!</string>
+    <string name="warningJokerSelect">Tienes que empezar una nueva partida para que estas modificaciónes sean válidas!</string>
+</resources>

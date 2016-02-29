@@ -3,66 +3,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activities.CreditsActivity"
-    android:orientation="vertical"
     >
 
     <TextView
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/CreditsTop"
         android:id="@+id/creditsTop"
-        android:layout_weight="3"
-        android:textSize="40sp"
         style="@style/credits_item"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:text="@string/CreditsTop"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="40sp"
          />
 
     <TextView
-        android:text="@string/CreditsAuthors"
         android:id="@+id/creditsAuthors"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        style="@style/credits_item"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:textSize="22sp"
-        style="@style/credits_item" />
+        android:text="@string/CreditsAuthors"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="22sp" />
 
     <TextView
-        android:text="@string/CreditsAuthor1"
         android:id="@+id/creditsAuthor1"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_weight="1"
-        android:textSize="20sp"
         style="@style/credits_item"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/CreditsAuthor1"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp"
         />
 
     <TextView
-        android:text="@string/CreditsSubject"
         android:id="@+id/creditsSubject"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_weight="1"
-        android:textSize="12sp"
         style="@style/credits_item"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/CreditsSubject"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="12sp"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_height="60dp"
+        android:layout_weight="0"
+        android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            />
+            android:nestedScrollingEnabled="false"
+            android:scaleType="fitXY"
+            android:src="@drawable/marca_upv_principal_color" />
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            />
+            android:scaleType="fitXY"
+            android:src="@drawable/etsinf" />
 
 
     </LinearLayout>

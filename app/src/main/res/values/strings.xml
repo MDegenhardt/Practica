@@ -17,7 +17,7 @@
     <string name="settingsHelp">How many times can you ask for help:</string>
     <string name="SettingsAddFriend">Add friend</string>
     <string name="HintFriend">a friend\'s name</string>
-    <string name="PlayForAmount">Play for %1$d €</string>
+    <string name="PlayForAmount">Play for %1$d€</string>
     <string name="QuestionNumber">Question %1$d</string>
     <string name="QuestionText">What is the Question?</string>
     <string name="textAnswer1">Answer1</string>
@@ -29,15 +29,23 @@
     <string name="title_activity_scores_delete">Delete scores</string>
     <string name="tabLocal">Local</string>
     <string name="tabFriends">Friends</string>
-    <string name="correctAnswerMsg">Correct answer! You accumulated %1$d €</string>
-    <string name="endMessageQuit">Game finished! You won %1$d €</string>
-    <string name="endMessageLost">Wrong answer! You won %1$d €</string>
-    <string name="endMessageWon">Congratulations!!! You knew everything and won %1$d €</string>
+    <string name="correctAnswerMsg">Correct answer! You accumulated %1$d€</string>
+    <string name="endMessageQuit">Game finished! You won %1$d€</string>
+    <string name="endMessageLost">Wrong answer! You won %1$d€</string>
+    <string name="endMessageWon">Congratulations!!! You knew everything and won %1$d€!</string>
     <string name="resume">Resume</string>
     <string name="phoneJokerMessage">Your contact thinks that answer %1$d is correct.</string>
     <string name="audienceJokerMessage">The audience thinks that answer %1$d is correct.</string>
     <string name="filenameQuestions">questions.xml</string>
     <string name="confirmation_clear">Are you sure you want to delete ALL the local highscores from the database?</string>
     <string name="connection_not_available">No connection available. Please try again later.</string>
+    <string name="sv0NoJokers">0: No Jokers</string>
+    <string name="sv1_50">1: + 50-50 Joker</string>
+    <string name="sv2_tel">2: + Telephone Joker</string>
+    <string name="sv3_aud">3: + Audience Joker</string>
+    <string name="addedFriend">Added %1$s as a friend of %2$s online.</string>
+    <string name="anonymousUser" translatable="false">Anonymous</string>
+    <string name="warningFriendName">You have to add a name!</string>
+    <string name="warningJokerSelect">Remember that you have to start a new game for this changes to become valid!</string>
 
 </resources>
