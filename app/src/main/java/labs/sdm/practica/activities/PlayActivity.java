@@ -8,7 +8,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,7 +60,7 @@ public class PlayActivity extends AppCompatActivity {
 
         mAchievedPoints = prefs.getInt("achievedPoints", 0);
         mCurrentQuestion = prefs.getInt("currentQuestion", 1);
-        mJokerMode = prefs.getInt("helpNumber",0);
+        mJokerMode = prefs.getInt("helpNumber",3);
 
         InputStream inputStream = null;
         try {
@@ -99,14 +98,16 @@ public class PlayActivity extends AppCompatActivity {
 
 //        Log.d("PlayActivity",q.getText());
 
+        float alphaFull = 1.0f;
+
         bAnswer1.setEnabled(true);
-        bAnswer1.setAlpha(1.0f);
+        bAnswer1.setAlpha(alphaFull);
         bAnswer2.setEnabled(true);
-        bAnswer2.setAlpha(1.0f);
+        bAnswer2.setAlpha(alphaFull);
         bAnswer3.setEnabled(true);
-        bAnswer3.setAlpha(1.0f);
+        bAnswer3.setAlpha(alphaFull);
         bAnswer4.setEnabled(true);
-        bAnswer4.setAlpha(1.0f);
+        bAnswer4.setAlpha(alphaFull);
 
 
         tvQuestionText.setText( q.getText());
@@ -182,19 +183,19 @@ public class PlayActivity extends AppCompatActivity {
         switch(view.getId()){
             case R.id.bAnswer1 :
                 answerSelected = 1;
-                Log.d("PlayActivity", "Answer 1 selected");
+//                Log.d("PlayActivity", "Answer 1 selected");
                 break;
             case R.id.bAnswer2 :
                 answerSelected = 2;
-                Log.d("PlayActivity", "Answer 2 selected");
+//                Log.d("PlayActivity", "Answer 2 selected");
                 break;
             case R.id.bAnswer3 :
                 answerSelected = 3;
-                Log.d("PlayActivity", "Answer 3 selected");
+//                Log.d("PlayActivity", "Answer 3 selected");
                 break;
             case R.id.bAnswer4 :
                 answerSelected = 4;
-                Log.d("PlayActivity", "Answer 4 selected");
+//                Log.d("PlayActivity", "Answer 4 selected");
                 break;
 
         }
@@ -330,22 +331,24 @@ Check whether Internet connectivity is available
                 int f1 = Integer.parseInt(q.getFifty1());
                 int f2 = Integer.parseInt(q.getFifty2());
 
+                float alphaHalf = 0.5f;
+
                 switch (f1){
                     case 1:
                         bAnswer1.setEnabled(false);
-                        bAnswer1.setAlpha(.5f);
+                        bAnswer1.setAlpha(alphaHalf);
                         break;
                     case 2:
                         bAnswer2.setEnabled(false);
-                        bAnswer2.setAlpha(.5f);
+                        bAnswer2.setAlpha(alphaHalf);
                         break;
                     case 3:
                         bAnswer3.setEnabled(false);
-                        bAnswer3.setAlpha(.5f);
+                        bAnswer3.setAlpha(alphaHalf);
                         break;
                     case 4:
                         bAnswer4.setEnabled(false);
-                        bAnswer4.setAlpha(.5f);
+                        bAnswer4.setAlpha(alphaHalf);
                         break;
                     default:
                         break;
@@ -353,19 +356,19 @@ Check whether Internet connectivity is available
                 switch (f2){
                     case 1:
                         bAnswer1.setEnabled(false);
-                        bAnswer1.setAlpha(.5f);
+                        bAnswer1.setAlpha(alphaHalf);
                         break;
                     case 2:
                         bAnswer2.setEnabled(false);
-                        bAnswer2.setAlpha(.5f);
+                        bAnswer2.setAlpha(alphaHalf);
                         break;
                     case 3:
                         bAnswer3.setEnabled(false);
-                        bAnswer3.setAlpha(.5f);
+                        bAnswer3.setAlpha(alphaHalf);
                         break;
                     case 4:
                         bAnswer4.setEnabled(false);
-                        bAnswer4.setAlpha(.5f);
+                        bAnswer4.setAlpha(alphaHalf);
                         break;
                     default:
                         break;

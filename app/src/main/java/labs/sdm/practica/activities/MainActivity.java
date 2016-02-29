@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
             bMainMenuPlay.setText(getResources().getString(R.string.resume));
         } else {
             bMainMenuPlay.setText(getResources().getString(R.string.bPlay));
+            //reset Jokers according to settings
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("jokersSet", false);
+            editor.apply();
         }
     }
 

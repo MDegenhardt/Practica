@@ -21,7 +21,7 @@
     <string name="filenameQuestions">questions (spanish).xml</string>
     <string name="phoneJokerMessage">Tu contacto telefónico piensa que la respuesta correcta es %1$d.</string>
     <string name="resume">Continuar</string>
-    <string name="settingsEnterName">Introduzca el nombre de tu amigo</string>
+    <string name="settingsEnterName">Introduzca tu nombre</string>
     <string name="settingsFriendsDescr">Puedes añadir un amigo:</string>
     <string name="settingsHelp">Cuántas veces puedes pedir ayuda:</string>
     <string name="settingsName">Nombre:</string>

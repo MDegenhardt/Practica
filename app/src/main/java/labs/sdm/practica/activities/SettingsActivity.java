@@ -21,7 +21,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
     // Holds reference to the asynchronous task
     AddFriendAsyncTask task;
-    private int nHelpSelected = 0;
+    private int nHelpSelected = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     @Override
     protected void onResume() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        nHelpSelected = prefs.getInt("helpNumber", 0);
+        nHelpSelected = prefs.getInt("helpNumber", 3);
         ((Spinner) findViewById(R.id.spinner)).setSelection(nHelpSelected);
         ((EditText) findViewById(R.id.etName)).setText(prefs.getString("userName", getResources().getString(R.string.anonymousUser)));
         ((EditText) findViewById(R.id.etAddFriend)).setText(prefs.getString("friendsName", ""));
